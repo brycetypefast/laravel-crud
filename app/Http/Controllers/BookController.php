@@ -87,7 +87,10 @@ class BookController extends Controller
         $user = Auth::user();
 
         $user->books()->detach($id);
-        return view('books');
+
+        $books = $user->books()->get();
+        
+        return view('books', ['books' => $books]);
 
     }
 

@@ -16,6 +16,6 @@ class BookUserController extends Controller
         // attach just this one book
         $user->books()->attach($bookId);
 
-        return redirect()->back()->with('success', 'Book added to user’s list!');
+        return view('allbooks');
     }
 }

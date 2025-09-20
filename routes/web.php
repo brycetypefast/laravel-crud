@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BookUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('allbooks');
+})->middleware(['auth', 'verified'])->name('allbooks');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -20,7 +21,7 @@ Route::get('/books', [BookController::class, 'index'])->middleware(['auth', 'ver
 Route::delete('/books/delete/{id}', [BookController::class, 'remove_relation'])->middleware(['auth', 'verified'])->name('book.remove');
 Route::get('/books/read', [BooksController::class, 'show'])->middleware(['auth', 'verified'])->name('books.read');
 Route::get('/books/{book}', [BookController::class, 'show'])->middleware(['auth', 'verified'])->name('book');
-
+Route::post('/books/add/{id}', [BookUserController::class, 'store'])->middleware(['auth', 'verified'])->name('book-user.store');
 Route::patch('/books/{id}', [BookController::class, 'updateHasRead'])->middleware(['auth', 'verified'])->name('book.hasread');
 
 
