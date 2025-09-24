@@ -28,8 +28,7 @@ use Illuminate\Support\Facades\Auth;
                         @csrf
                         @method('PATCH')
                         <label for="has_read">Read?</label>
-                        <input type="hidden" name="has_read" value="0">
-                        <input type="checkbox" name="has_read" id="has_read" value="1" onChange="submit()" {{ old('has_read', $book->pivot->has_read) ? 'checked' : '' }}>
+                        <input type="checkbox" name="has_read" id="has_read" value="{{ old('has_read', $book->pivot->has_read) ? '0' : '1' }}" onChange="submit()" {{ old('has_read', $book->pivot->has_read) ? 'checked' : '' }}>
                     </form>
                     <form action="{{  route('book.remove', $book->id) }}" method="POST">
                         @csrf
